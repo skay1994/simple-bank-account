@@ -2,7 +2,7 @@ use std::fs::File;
 use std::io::{Read, Write};
 
 fn main() {
-    save_file("{\"some\": \"json\"}".to_string());
+    save_file(&"{\"some\": \"json\"}".to_string());
     println!("Hello, world! {}", open_file());
 }
 
@@ -17,7 +17,7 @@ fn open_file() -> String {
     content
 }
 
-fn save_file(content: String) {
+fn save_file(content: &String) {
     let mut file = File::create("accounts.json")
         .expect("Err: Error to create \"accounts.json\" file.");
 
