@@ -1,5 +1,6 @@
-use std::fs::{File, remove_file};
-use std::io::{Read, Write};
+mod account_file;
+
+use account_file::*;
 
 fn main() {
     save_file(&"{\"some\": \"json\"}".to_string());
