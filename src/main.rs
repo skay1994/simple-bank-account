@@ -1,4 +1,4 @@
-use std::fs::File;
+use std::fs::{File, remove_file};
 use std::io::{Read, Write};
 
 fn main() {
@@ -23,4 +23,44 @@ fn save_file(content: &String) {
 
     file.write_all(content.as_bytes())
         .expect("Err: Failed to save a file content:");
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::path::Path;
+
+    fn remove_file_data() {
+        if get_file_path().exists() {
+            remove_file("accounts.json")
+                .expect("Err: Failed to remove file")
+        }
+    }
+
+    fn get_file_path() -> &'static Path {
+        Path::new("accounts.json")
+    }
+
+    #[test]
+    fn test_file_exists() {
+        remove_file_data();
+        assert!(!get_file_path().exists())
+    }
+
+    #[test]
+    #[should_panic="Err: File accounts.json not found"]
+    fn test_open_file_with_not_found() {
+        remove_file_data();
+        open_file();
+    }
+
+    #[test]
+    fn test_create_file() {
+        let content = String::from("some content");
+        remove_file_data();
+        save_file(&content);
+
+        assert!(get_file_path().exists());
+        assert_eq!(open_file(), content)
+    }
 }
