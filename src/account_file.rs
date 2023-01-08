@@ -1,7 +1,7 @@
 use std::fs::File;
 use std::io::{Read, Write};
 
-fn open_file() -> String {
+pub fn open_file() -> String {
     let mut content = String::new();
     let mut file = File::open("accounts.json")
         .expect("Err: File accounts.json not found");
@@ -12,7 +12,7 @@ fn open_file() -> String {
     content
 }
 
-fn save_file(content: &String) {
+pub fn save_file(content: &String) {
     let mut file = File::create("accounts.json")
         .expect("Err: Error to create \"accounts.json\" file.");
 
