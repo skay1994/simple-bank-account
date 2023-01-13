@@ -8,3 +8,5 @@ edition = "2021"
 [dependencies]
 serde = "^1.0"
 serde_json = "^1.0"
+chrono = "0.4.23"
+rusty-money = { version = "0.4.1", features = ["iso"] }
