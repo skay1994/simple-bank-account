@@ -35,3 +35,42 @@ impl Account {
         self.balance -= value
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_account_create() {
+        let user = User {
+            name: "Jorge".to_string(),
+            last_name: "Carlos".to_string()
+        };
+        let account = Account::new(user, 1500);
+        assert_eq!(account.user.full_name(), "Jorge Carlos");
+        assert_eq!(account.balance, 1500);
+        assert_eq!(account.balance_formatted(), "R$1,500.00")
+    }
+
+    #[test]
+    fn test_account_add_balance() {
+        let user = User {
+            name: "Jorge".to_string(),
+            last_name: "Carlos".to_string()
+        };
+        let mut account = Account::new(user, 1500);
+        account.add_balance(500);
+        assert_eq!(account.balance, 2000);
+    }
+
+    #[test]
+    fn test_account_withdraw_balance() {
+        let user = User {
+            name: "Jorge".to_string(),
+            last_name: "Carlos".to_string()
+        };
+        let mut account = Account::new(user, 1500);
+        account.withdraw_balance(500);
+        assert_eq!(account.balance, 1000);
+    }
+}
