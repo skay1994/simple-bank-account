@@ -1,5 +1,6 @@
 use crate::structs::User;
 
+use rusty_money::{Money, iso};
 use chrono::{DateTime, Utc};
 
 #[derive(Debug)]
@@ -18,5 +19,9 @@ impl Account {
             created_at: Utc::now(),
             update_at: Utc::now()
         }
+    }
+
+    pub fn balance_formatted(&self) -> String {
+        Money::from_str(&*self.balance.to_string(), iso::BRL).unwrap().to_string()
     }
 }
