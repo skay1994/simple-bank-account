@@ -25,3 +25,13 @@ impl Account {
         Money::from_str(&*self.balance.to_string(), iso::BRL).unwrap().to_string()
     }
 }
+
+impl Account {
+    pub fn add_balance(&mut self, value: i32) {
+        self.balance += value
+    }
+
+    pub fn withdraw_balance(&mut self, value: i32) {
+        self.balance -= value
+    }
+}
